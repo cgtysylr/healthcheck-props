@@ -5,8 +5,87 @@ app = Flask(__name__)
 
 # Varsayılan healthcheck JSON'u
 default_healthcheck = {
-    "status": "healthy",
-    "message": "Service is ready"
+  "status": "Healthy",
+  "totalDuration": "00:00:00.1234567",
+  "entries": {
+    "Database": {
+      "status": "Healthy",
+      "description": "Database Running",
+      "duration": "00:00:00.0123456",
+      "tags": [
+        "core",
+        "database",
+        "postgres"
+      ],
+      "priority": "CRITICAL",
+      "data": {
+        "total": "Post Count 20456"
+      }
+    },
+    "Edocbroker": {
+      "status": "Healthy",
+      "description": "Edocbroker Not Connecting",
+      "duration": "00:00:00.0234567",
+      "tags": [
+        "internal",
+        "application"
+      ],
+      "priority": "OPTIONAL",
+      "data": {
+        "error": "Timeout occurred while connecting to example dependency 2."
+      }
+    },
+    "Graylog": {
+      "status": "Healthy",
+      "description": "Logging",
+      "duration": "00:00:00.0234567",
+      "tags": [
+        "internal",
+        "application",
+        "thirdparty"
+      ],
+      "priority": "OPTIONAL",
+      "data": {}
+    },
+    "Keycloak": {
+      "status": "Healthy",
+      "description": "Authentication",
+      "duration": "00:00:00.0234567",
+      "tags": [
+        "internal",
+        "application",
+        "thirdparty"
+      ],
+      "priority": "DEPENDS",
+      "data": {}
+    },
+    "GIB": {
+      "status": "Degraded",
+      "description": "Example dependency 3 is experiencing higher than normal latency.",
+      "duration": "00:00:00.0345678",
+      "tags": [
+        "external",
+        "rabbitmq"
+      ],
+      "priority": "CRITICAL",
+      "data": {
+        "latency": "200ms"
+      }
+    },
+    "AWS": {
+      "status": "Healthy",
+      "description": "AWS Connected",
+      "duration": "00:00:00.0345678",
+      "tags": [
+        "external",
+        "cloud"
+      ],
+      "priority": "DEPENDS",
+      "data": {
+        "latency": "200ms"
+      }
+    }
+  }
 }
 
 # Mevcut healthcheck JSON'u (başlangıçta default)

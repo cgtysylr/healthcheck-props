@@ -21,7 +21,7 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: healthcheck-controller
-        image: atrosdc/healthcheck-probs:1.0.0
+        image: atrosdc/healthcheck-probs:1.0.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -45,12 +45,12 @@ spec:
         livenessProbe:
           exec:
             command:
-            - /usr/local/bin/healthcheck-probe.sh
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 6
-          successThreshold: 1
+            - /usr/local/bin/healthcheck-probe.sh 
+          initialDelaySeconds: 30 # 30 saniye sonra liveness probe başlar
+          periodSeconds: 10 # 10 saniyede bir kontrol eder
+          timeoutSeconds: 30 # 30 saniye timeout
+          failureThreshold: 6 # 6 kez başarısız olursa restart eder (10 saniye * 6 = 1 dakika)
+          successThreshold: 1 # 1 kez başarılı olursa probe başarılı olarak kabul edilir
         readinessProbe:
           httpGet:
             path: /health/ready
