@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: healthcheck-controller
+  namespace: healthcheck
   labels:
     app: healthcheck-controller
     version: v1
@@ -16,9 +17,11 @@ spec:
         app: healthcheck-controller
         version: v1
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
       containers:
       - name: healthcheck-controller
-        image: healthcheck-controller:latest
+        image: atrosdc/healthcheck-probs:1.0.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -40,13 +43,13 @@ spec:
             memory: "128Mi"
             cpu: "100m"
         livenessProbe:
-          httpGet:
-            path: /health/live
-            port: 8080
-          initialDelaySeconds: 10
+          exec:
+            command:
+            - /usr/local/bin/healthcheck-probe.sh
+          initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
-          failureThreshold: 3
+          failureThreshold: 6
           successThreshold: 1
         readinessProbe:
           httpGet:

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: healthcheck-controller-config
+  namespace: healthcheck
+  labels:
+    app: healthcheck-controller
+data:
+  flask_env: "production"
+  log_level: "INFO"
