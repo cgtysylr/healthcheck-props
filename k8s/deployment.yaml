@@ -7,7 +7,7 @@ metadata:
     app: healthcheck-controller
     version: v1
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: healthcheck-controller
@@ -21,7 +21,7 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: healthcheck-controller
-        image: atrosdc/healthcheck-probs:1.0.1
+        image: atrosdc/healthcheck-probs:1.0.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

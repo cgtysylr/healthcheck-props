@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: healthcheck-controller-ingress
+  namespace: healthcheck
+  labels:
+    app: healthcheck-controller
+  annotations: {}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: devops-dev.mikrogrup.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: healthcheck-controller
+            port:
+              number: 80
+  # TLS konfigürasyonu (opsiyonel - cert-manager kullanıyorsanız)
+  # tls:
+  # - hosts:
+  #   - healthcheck.example.com
+  #   secretName: healthcheck-controller-tls
+

@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 # Varsayılan healthcheck JSON'u
 default_healthcheck = {
-  "status": "Healthy",
+  "status": "UnHealthy",
   "totalDuration": "00:00:00.1234567",
   "entries": {
     "Database": {
-      "status": "Healthy",
+      "status": "UnHealthy",
       "description": "Database Running",
       "duration": "00:00:00.0123456",
       "tags": [
