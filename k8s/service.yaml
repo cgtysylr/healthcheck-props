@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: healthcheck-controller
+  labels:
+    app: healthcheck-controller
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: healthcheck-controller
+  sessionAffinity: None
+
